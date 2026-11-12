@@ -1,0 +1,16 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sign up | {{APP_NAME}}</title><link rel="stylesheet" href="/css/style.css"></head><body>
+<div class="auth-wrap"><aside class="auth-side"><a class="logo" href="/"><i></i>{{APP_NAME}}</a>
+<div><h2>Create your account in three steps.</h2><ul>
+<li><svg class="ic"><use href="/img/icons.svg#check-circle"/></svg><span><b>1. Choose a plan</b><br>Local jobs or international remote jobs.</span></li>
+<li><svg class="ic"><use href="/img/icons.svg#dollar"/></svg><span><b>2. Pay by JazzCash or Easypaisa</b><br>Upload the screenshot with your details.</span></li>
+<li><svg class="ic"><use href="/img/icons.svg#clock"/></svg><span><b>3. We approve you</b><br>Usually {{APPROVAL}}. Then you log in.</span></li></ul></div><small style="color:#93a8d6">&copy; {{APP_NAME}}</small></aside>
+<main class="auth-main"><div class="card wide"><h1>Create your account</h1><div id="msg" class="alert" hidden></div>
+<form id="signupForm"><b>1. Choose your plan</b><div id="planOpts"></div>
+<b style="display:block;margin-top:18px">2. Pay</b><div class="pay" id="payInfo"></div>
+<b style="display:block;margin-top:18px">3. Your details</b>
+<div class="form2"><label>Full name<input name="name" required maxlength="80" autocomplete="name"></label><label>Email (you will log in with this)<input name="email" type="email" required autocomplete="username"></label>
+<label>Password (min 8 characters)<input name="password" type="password" required minlength="8" autocomplete="new-password"></label><label>Repeat password<input name="password2" type="password" required minlength="8" autocomplete="new-password"></label>
+<label>Transaction ID (optional)<input name="txid" maxlength="40"></label><label>Payment screenshot (PNG or JPG)<input name="shot" type="file" accept="image/png,image/jpeg" required></label></div>
+<button class="btn btn-primary btn-block btn-lg" style="margin-top:10px">Submit for approval</button></form>
+<p class="muted center" style="margin:16px 0 0">Already approved? <a href="/login">Log in</a></p></div></main></div>
+<script src="/js/common.js"></script><script src="/js/auth.js"></script></body></html>

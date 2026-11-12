@@ -1,0 +1,37 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Dashboard | {{APP_NAME}}</title><link rel="stylesheet" href="/css/style.css"></head><body>
+<div class="shell"><aside class="side"><a class="logo" href="/app"><i></i>{{APP_NAME}}</a>
+<nav class="nav"><button data-tab="find" class="on"><svg class="ic"><use href="/img/icons.svg#search"/></svg>Find jobs</button>
+<button data-tab="tracker"><svg class="ic"><use href="/img/icons.svg#briefcase"/></svg>Tracker<span class="count" id="dueCount" hidden></span></button>
+<button data-tab="profile"><svg class="ic"><use href="/img/icons.svg#user"/></svg>My profile</button></nav>
+<div class="plancard"><div class="row"><span class="badge" id="planBadge"></span><small id="planAccess"></small></div><p style="margin:10px 0 0;font-weight:650" id="planScope"></p>
+<div class="meter" id="planBars"></div><small id="usage" class="sr"></small>
+<div class="upgrade" id="upgrade" hidden><b>Want international remote jobs?</b><br>They are included in the Pro plan. Contact us to upgrade.</div></div>
+<button class="nav-out" id="logout"><svg class="ic"><use href="/img/icons.svg#log-out"/></svg>Log out</button></aside>
+<main class="main"><div class="page-h"><h1 id="pageTitle">Find jobs</h1><p class="muted" id="pageSub"></p></div>
+
+<section id="tab-find"><form id="searchForm" class="panel" style="padding:22px">
+<div class="seg"><input type="radio" id="sc-local" name="scope" value="local" checked><label for="sc-local"><svg class="ic"><use href="/img/icons.svg#map-pin"/></svg>Local jobs <small>Pakistan</small></label>
+<input type="radio" id="sc-remote" name="scope" value="remote"><label for="sc-remote"><svg class="ic"><use href="/img/icons.svg#globe"/></svg>International remote <span class="lock" id="proTag">PRO</span></label></div>
+<div class="alert info" id="upsell" hidden>International remote jobs are included in the Pro plan. Contact us to upgrade your plan.</div>
+<div class="form2"><label>Job keywords<div class="inp"><svg class="ic"><use href="/img/icons.svg#search"/></svg><input name="keywords" required maxlength="100" placeholder="e.g. data analyst python"></div></label>
+<label><span id="locLabel">City in Pakistan (optional)</span><div class="inp"><svg class="ic"><use href="/img/icons.svg#map-pin"/></svg><input name="location" maxlength="80" placeholder="e.g. Lahore, Karachi, Islamabad"></div></label>
+<label class="full">Company career page links (optional)<textarea name="links" rows="2" placeholder="One link per line, e.g. https://company.com/careers"></textarea><small class="muted" id="linkHint"></small></label>
+<label>Resume (PDF, DOCX or TXT)<input name="resume" type="file" accept=".pdf,.docx,.txt"><small class="muted" id="resumeHint"></small></label>
+<label>Hide weak matches<select name="minMatch"><option value="0">Show all</option><option value="15" selected>Below 15%</option><option value="30">Below 30%</option><option value="50">Below 50%</option></select></label>
+<label class="full" style="margin:6px 0 16px"><input type="checkbox" name="remember" checked>Remember my search settings and resume</label></div>
+<button class="btn btn-primary btn-lg" id="searchBtn"><svg class="ic"><use href="/img/icons.svg#search"/></svg>Search jobs</button> <span id="searchState" class="muted"></span></form>
+<div id="notes"></div>
+<div class="panel empty" id="empty"><svg class="art" viewBox="0 0 150 130" aria-hidden="true"><rect x="24" y="14" width="78" height="100" rx="10" fill="#EEF3FF" stroke="#C9D8F7" stroke-width="2"/><rect x="36" y="32" width="40" height="7" rx="3.5" fill="#C9D8F7"/><rect x="36" y="48" width="54" height="7" rx="3.5" fill="#DCE6FA"/><rect x="36" y="64" width="46" height="7" rx="3.5" fill="#DCE6FA"/><circle cx="96" cy="84" r="24" fill="#fff" stroke="#2563EB" stroke-width="6"/><line x1="114" y1="102" x2="132" y2="120" stroke="#2563EB" stroke-width="8" stroke-linecap="round"/><path d="M86 84l7 7 12-14" fill="none" stroke="#10B981" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+<h3>Start your search</h3><p>Choose where to search, enter what you are looking for and press Search. Your best matches appear first.</p>
+<div class="tips"><div class="tip"><b>Match score</b>Each job is ranked against your resume.</div><div class="tip"><b>Keyword gap</b>See what a job wants that your resume lacks.</div><div class="tip"><b>One click tracking</b>Mark jobs as applied and get follow-up reminders.</div></div></div>
+<div id="resultsHead" class="results-h" hidden></div><div id="results"></div></section>
+
+<section id="tab-tracker" hidden><div id="due"></div><div class="panel"><div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px"><h3 style="margin:0">Your applications</h3><a class="btn btn-sm btn-outline" href="/api/apps.csv"><svg class="ic"><use href="/img/icons.svg#download"/></svg>Export CSV</a></div><div class="scroll" id="trackerBox"></div></div></section>
+
+<section id="tab-profile" hidden><form id="profileForm" class="panel"><h3>My profile</h3><p class="muted">Saved in your account. Your name is used in cover letters and your skills improve matching.</p><div class="form2">
+<label>Full name<input name="full_name" maxlength="80"></label><label>Phone (optional)<input name="phone" maxlength="30"></label>
+<label class="full">Target job title<input name="target_role" maxlength="80" placeholder="e.g. Data Analyst"></label>
+<label class="full">Skills and extra keywords<textarea name="skills" rows="3" maxlength="500" placeholder="python, sql, tableau, power bi"></textarea></label></div><button class="btn btn-primary">Save profile</button></form>
+<div class="panel"><h3>Saved resume</h3><div id="resumeBox"></div><label>Upload a new resume<input id="resumeFile" type="file" accept=".pdf,.docx,.txt"></label><button class="btn btn-outline" id="resumeSave"><svg class="ic"><use href="/img/icons.svg#upload"/></svg>Save resume</button></div>
+<div class="panel"><h3>Delete my data</h3><p class="muted">Removes your saved profile and resume. Your tracked applications stay.</p><button class="btn btn-red btn-sm" id="wipe">Delete my profile data</button></div></section></main></div>
+<script src="/js/common.js"></script><script src="/js/app.js"></script></body></html>

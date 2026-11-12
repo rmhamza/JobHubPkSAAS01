@@ -1,0 +1,25 @@
+{
+  "name": "jobpilot-saas",
+  "version": "1.0.0",
+  "description": "Job search SaaS: Firecrawl job search, resume matching, plan limits, manual payment approval",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test test/api.test.js test/demo.test.js test/ui.test.js",
+    "live-test": "node scripts/live-test.js",
+    "backup": "node scripts/backup.js"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "license": "UNLICENSED",
+  "dependencies": {
+    "better-sqlite3": "12.11.1",
+    "express": "^4.21.0",
+    "mammoth": "^1.8.0",
+    "unpdf": "^1.0.0"
+  },
+  "devDependencies": {
+    "jsdom": "^31.0.0"
+  }
+}

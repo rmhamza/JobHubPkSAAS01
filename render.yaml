@@ -1,0 +1,40 @@
+# Render Blueprint. Push this project to a private GitHub repo, then in Render: New > Blueprint > pick the repo.
+# A persistent disk needs a paid instance (the Free instance has no disk and sleeps after 15 minutes), so this uses "starter".
+services:
+  - type: web
+    name: jobpilot
+    runtime: node
+    plan: starter
+    region: singapore
+    buildCommand: npm install --omit=dev
+    startCommand: npm start
+    healthCheckPath: /healthz
+    disk:
+      name: jobpilot-data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: NODE_ENV
+        value: production
+      - key: TRUST_PROXY
+        value: "1"
+      - key: DB_PATH
+        value: /var/data/app.db
+      - key: APP_TZ
+        value: Asia/Karachi
+      - key: APP_NAME
+        value: JobPilot PK
+      - key: FIRECRAWL_DAILY_CALLS
+        value: "1500"
+      # Render asks you for these when you create the Blueprint (they are never stored in the repo):
+      - key: ADMIN_EMAIL
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: PAYMENT_INFO
+        sync: false
+      - key: FIRECRAWL_API_KEY
+        sync: false
+      # Optional, add later in Render > Environment: ANTHROPIC_API_KEY (AI letters), APPROVAL_TEXT
